@@ -28,7 +28,7 @@ DEBUG = True
 
 
 AUTH_USER_MODEL = 'shop.MyUser'
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['my-ecommerce-production.up.railway.app' ,'127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
