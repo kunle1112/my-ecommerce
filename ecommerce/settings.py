@@ -28,7 +28,7 @@ DEBUG = True
 
 
 AUTH_USER_MODEL = 'shop.MyUser'
-ALLOWED_HOSTS = ['k-ecommerce-production.up.railway.app' ,'127.0.0.1']
+ALLOWED_HOSTS = ['https://my-ecommerce-production.up.railway.app' ,'127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -182,12 +182,12 @@ EMAIL_HOST_PASSWORD =email_host_password
 RECIPIENT_ADDRESS=recipient_address
 
 CORS_ALLOWED_ORIGINS = [
-        'https://k-ecommerce-production.up.railway.app',
+        'https://my-ecommerce-production.up.railway.app',
         "http://localhost:8000"
         
     ]
 
-CSRF_TRUSTED_ORIGINS = ['https://k-ecommerce-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://my-ecommerce-production.up.railway.app']
 CORS_ALLOW_CREDENTIALS=True
 
 if DEBUG:
