@@ -72,7 +72,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':[],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,11 +90,24 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+"""
+DATABASES = {
+    'default': {
+         #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'p5cZkKsPA965WyF2hccI',
+        'HOST': 'containers-us-west-67.railway.app',
+        'PORT': '6468',
     }
 }
 
@@ -170,7 +183,7 @@ RECIPIENT_ADDRESS=recipient_address
 
 CORS_ALLOWED_ORIGINS = [
         'https://k-ecommerce-production.up.railway.app',
-        "http://localhost:8080"
+        "http://localhost:8000"
         
     ]
 
@@ -182,13 +195,25 @@ if DEBUG:
     STRIPE_PUBLISHABLE_KEY='pk_test_51M5nlOLKr5zDNqsywjUPyZHSdKnLHQELRnvl5UsIumwcqpCUvGJBzHjpItpaVlFBc2xmi8hBKoDgy1z1coFFkGbx003Vm3ghc4'
 
 
-#AUTHENTICATION_BACKENDS = (
-    #"allauth.account.auth_backends.AuthenticationBackend",
+AUTHENTICATION_BACKENDS = (
+   
+   'django.contrib.auth.backends.ModelBackend',
+   "allauth.account.auth_backends.AuthenticationBackend",
     #'shop.MyUser'
-#)
+)
 
 
-SITE_ID = 1
+SITE_ID =1
 ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
+ACCOUNT_UNIQUE_EMAIL = True
+
+#SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+#AUTHORIZE_REDIRECT_URLS=(
+#'http://localhost:8000/complete/google-oauth2/',
+#https://project-domain.com/complete/google-oauth2/
+#)
+
