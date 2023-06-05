@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -111,7 +111,7 @@ DATABASES = {
     }
 }
 
-
+"""
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -217,3 +217,9 @@ ACCOUNT_UNIQUE_EMAIL = True
 #https://project-domain.com/complete/google-oauth2/
 #)
 
+#S3 bucket
+AWS_QUERYSTRING_AUTH=False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID='AKIATRQH4QNYEK2554YU'
+AWS_SECRET_ACCESS_KEY='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'
+AWS_STORAGE_BUCKET_NAME='k-ecomerce'
