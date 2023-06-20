@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+import dj_database_url
+import environs
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x#pv)v)cj5!$3n__f&9$b8x6b^(&$vo@=p94!$uprt0j_d9^@j'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,11 +90,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ecommerce.wsgi.application'
-
+env=environs.Env()
+environs.Env.read_env()
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -98,7 +103,7 @@ DATABASES = {
     }
 }
 
-"""
+
 DATABASES = {
     'default': {
          #'ENGINE': 'django.db.backends.sqlite3',
@@ -112,6 +117,20 @@ DATABASES = {
 }
 
 """
+DATABASES = {
+    'default':dj_database_url.parse(env('DATABASE_URL'))
+ 
+}
+
+#Full database set-up
+""" 'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'dutmiaaz',
+    'USER': 'dutmiaaz',
+    'PASSWORD': '7nSEF5lUa0fmbprzJzhIALB_fjBZpvf9',
+    'HOST': 'silly.db.elephantsql.com',
+    'PORT': 5432
+  }"""
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -161,7 +180,7 @@ STATICFILES_DIR=[
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 email_host= 'smtp.risinghopegirlseducation.com'
 email_port =465
 email_use_ssl = True
@@ -170,16 +189,16 @@ email_host_password = 'myadmin_1234'
 
 # To email: contact form
 recipient_address='kunlefes089@gmail.com'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST =  email_host
-EMAIL_PORT =email_port
-EMAIL_USE_SSL = email_use_ssl
-EMAIL_HOST_USER =email_host_user
-EMAIL_HOST_PASSWORD =email_host_password
+EMAIL_HOST =  os.environ.get('EMAIL_HOST')
+EMAIL_PORT =os.environ.get('EMAIL_PORT')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_HOST_USER =os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =os.environ.get('EMAIL_HOST_PASSWORD')
 
 # To email: contact form
-RECIPIENT_ADDRESS=recipient_address
+RECIPIENT_ADDRESS=os.environ.get('RECIPIENT_ADDRESS')
 
 CORS_ALLOWED_ORIGINS = [
         'https://my-ecommerce-production.up.railway.app',
@@ -191,8 +210,8 @@ CSRF_TRUSTED_ORIGINS = ['https://my-ecommerce-production.up.railway.app']
 CORS_ALLOW_CREDENTIALS=True
 
 if DEBUG:
-    STRIPE_SECRET_KEY='sk_test_51M5nlOLKr5zDNqsyIfxLoo1XlhQrLHcM65IE8ZKbWM2JvxGvHoSxV8jwxkfnVzRmQLRiexu120XuxaArZPvHqSm400GUmidu76'
-    STRIPE_PUBLISHABLE_KEY='pk_test_51M5nlOLKr5zDNqsywjUPyZHSdKnLHQELRnvl5UsIumwcqpCUvGJBzHjpItpaVlFBc2xmi8hBKoDgy1z1coFFkGbx003Vm3ghc4'
+    STRIPE_SECRET_KEY=os.environ.get('STRIPE_SECRET_KEY')
+    STRIPE_PUBLISHABLE_KEY=os.environ.get('STRIPE_PUBLISHABLE_KEY')
 
 
 AUTHENTICATION_BACKENDS = (
@@ -219,7 +238,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 #S3 bucket
 AWS_QUERYSTRING_AUTH=False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID='AKIATRQH4QNYEK2554YU'
-AWS_SECRET_ACCESS_KEY='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'
-AWS_STORAGE_BUCKET_NAME='k-ecomerce'
+DEFAULT_FILE_STORAGE = os.environ.get('DEFAULT_FILE_STORAGE')
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
